@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="sign_in">Sign In</string>
+    <string name="welcome_to_tamang_food_services">Welcome to Tamang Food Services</string>
+    <string name="enter_your_phone_number_or_email_address_for_sign_in_enjoy_your_food">Enter your Phone number or Email address for sign in. Enjoy your food :)</string>
+    <string name="sign_up">Sign Up</string>
+</resources>
