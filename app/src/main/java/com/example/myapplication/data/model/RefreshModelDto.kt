@@ -1,23 +1,23 @@
 package com.example.myapplication.data.model
 
-import kotlinx.serialization.SerialName
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class RefreshRequestDto(
-    @SerialName("refresh_token")
+    @SerializedName("refresh_token")
     val refreshToken: String,
-    @SerialName("grant_type")
+    @SerializedName("grant_type")
     val grantType: String = "refresh_token"
 )
 
 @Serializable
 data class RefreshResponseDto(
-    @SerialName("id_token") val idToken: String,
-    @SerialName("refresh_token") val refreshToken: String,
-    @SerialName("expires_in") val expiresIn: Long,
-    @SerialName("user_id") val userId: String,
-    @SerialName("project_id") val projectId: String,
-    @SerialName("token_type") val tokenType: String,
-    @SerialName("access_token") val accessToken: String
+    @SerializedName("id_token") val idToken: String,
+    @SerializedName("refresh_token") val refreshToken: String,
+    @SerializedName("expires_in") val expiresIn: Long,
+    @SerializedName("user_id") val userId: String,
+    @SerializedName("project_id") val projectId: String,
+    @SerializedName("token_type") val tokenType: String,
+    @SerializedName("access_token") val accessToken: String
 )

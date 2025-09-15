@@ -8,11 +8,14 @@ import com.example.myapplication.domain.repository.AuthRepository
 import com.example.myapplication.domain.usecase.Auth.RefreshTokenUseCase
 import com.example.myapplication.domain.usecase.Auth.SignInUseCase
 import com.example.myapplication.domain.usecase.Auth.SignUpUseCase
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -24,12 +27,21 @@ object AuthModule {
 
     @Provides
     @Singleton
-    fun provideAuthApi(): AuthApi =
-        Retrofit.Builder()
+    fun provideAuthApi(): AuthApi {
+
+        val json = Json {
+            this.explicitNulls = true
+            this.isLenient = true
+            this.ignoreUnknownKeys = true
+        }
+        val contentType = "application/json".toMediaType()
+
+        return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create<AuthApi>()
+    }
 
     @Provides
     @Singleton

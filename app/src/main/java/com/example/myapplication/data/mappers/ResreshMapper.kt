@@ -11,5 +11,5 @@ fun RefreshResponseDto.toModel() =
         userId = userId,
         projectId = projectId,
         tokenType = tokenType,
-        accessToken = accessToken
+        accessToken = accessToken,
     )

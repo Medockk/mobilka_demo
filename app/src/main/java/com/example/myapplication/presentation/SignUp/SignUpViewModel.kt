@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.domain.error.GlobalErrorBody
 import com.example.myapplication.domain.model.AuthResponse
 import com.example.myapplication.domain.model.SignUpRequest
 import com.example.myapplication.domain.usecase.Auth.SignUpUseCase
@@ -45,15 +46,16 @@ class SignUpViewModel @Inject constructor(
                 viewModelScope.launch(Dispatchers.IO) {
                     val request = SignUpRequest(
                         email = _state.value.email,
-                        password = _state.value.password
+                        password = _state.value.password,
+                        returnSecureToken = true
                     )
 
                     try {
                         val result = signUpUseCase.invoke(request)
                         when (result) {
-                            is Result.Error<String> -> {
+                            is Result.Error<*> -> {
                                 _state.value = state.value.copy(
-                                    exception = result.error,
+                                    exception = result.error.toString(),
                                     isLoading = false
                                 )
                             }
@@ -62,7 +64,7 @@ class SignUpViewModel @Inject constructor(
                                 _state.value = state.value.copy(
                                     isLoading = false,
                                     isRegistered = true,
-                                    token = result.data.refreshToken
+                                    token = result.data.idToken
                                 )
                             }
                         }

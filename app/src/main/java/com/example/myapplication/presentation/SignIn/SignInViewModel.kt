@@ -5,6 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.domain.model.AuthResponse
 import com.example.myapplication.domain.model.SignInRequest
 import com.example.myapplication.domain.usecase.Auth.SignInUseCase
 import com.example.myapplication.domain.utils.Result
@@ -58,12 +59,13 @@ class SignInViewModel @Inject constructor(
                             )
                         }
                         Result.Loading -> Unit
-                        is Result.Success<*> -> {
+                        is Result.Success<AuthResponse> -> {
                             Log.e("onEvent", "${result.data}")
                             withContext(Dispatchers.Main) {
                                 _state.value = state.value.copy(
                                     isLoading = false,
-                                    isSuccessAuthentication = true
+                                    isSuccessAuthentication = true,
+                                    token = result.data.idToken
                                 )
                             }
                         }

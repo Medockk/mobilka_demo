@@ -144,7 +144,7 @@ fun SignInScreen(
 
     LaunchedEffect(state.isSuccessAuthentication) {
         if (state.isSuccessAuthentication) {
-            navController.navigate(Route.MainGraph) {
+            navController.navigate(Route.MainGraph.MainScreen(state.token)) {
                 popUpTo(Route.AuthGraph)
             }
         }

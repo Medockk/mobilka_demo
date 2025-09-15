@@ -9,4 +9,6 @@ data class SignInState(
     val isLoading: Boolean = false,
     val isSuccessAuthentication: Boolean = false,
     val exception: String = "",
+
+    val token: String = "",
 )
